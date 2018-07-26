@@ -23,6 +23,7 @@ It will return a json object which stores the Id of the game. Example response:
 It will return a json object which stores a response message. Example response:
 
 > {"data":"The game with given id is deleted successfully"} // If there is a game with given Id
+
 > {"data":"There is no game with given id."} // If there is no game with given Id
 
 ## Submit Score
@@ -39,4 +40,5 @@ It responses with status 204 no content if succeeds. If there is no game with gi
 It returns a json object which stores the total score and frameScores array. Example response:
 
 > {"data":{"totalScore":7,"frameScores":[7,0,0,0,0,0,0,0,0,0]}}
+
 > {"data":"There is no game with given id."} // If there is no game with given Id
