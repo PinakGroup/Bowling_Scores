@@ -27,17 +27,17 @@ public class BowlingGame {
         this.frames = frames;
     }
 
-    public Frame getFrame(int i){
+    public Frame getFrame(int i) {
         return frames[i];
     }
 
     public int getFrameScore(int frameNo) {
         Frame frame = frames[frameNo];
-        if(frame == null){
+        if (frame == null) {
             return 0;
         }
         if (frame.isStrike()) {
-            if(strikeBonus(frameNo) == 0){
+            if (strikeBonus(frameNo) == -1) { // Waiting for next frame(s) to be scored
                 frame.setScored(false);
                 return 0;
             }
@@ -45,7 +45,7 @@ public class BowlingGame {
             return 10 + strikeBonus(frameNo);
         }
         if (frame.isSpare()) {
-            if(spareBonus(frameNo) == 0){
+            if (spareBonus(frameNo) == -1) { // waiting for next frame to be scored
                 frame.setScored(false);
                 return 0;
             }
@@ -62,7 +62,7 @@ public class BowlingGame {
             return lastFrame.getThirdRoll();
         }
         Frame nextFrame = frames[frameNo + 1];
-        return nextFrame == null ? 0 : nextFrame.getFirstRoll();
+        return nextFrame == null ? -1 : nextFrame.getFirstRoll();
     }
 
     private int strikeBonus(int frameNo) {
@@ -71,15 +71,15 @@ public class BowlingGame {
             return lastFrame.getSecondRoll() + lastFrame.getThirdRoll();
         }
         Frame nextFrame = frames[frameNo + 1];
-        if(nextFrame == null){
-            return 0;
+        if (nextFrame == null) {
+            return -1;
         }
         if (nextFrame.isStrike()) {
             if (frameNo == 9) {
                 return 10 + nextFrame.getSecondRoll(); // next frame is the last frame which is special
             }
             Frame nextNextFrame = frames[frameNo + 2];
-            return nextNextFrame==null ? 0 : 10 + nextNextFrame.getFirstRoll();
+            return nextNextFrame == null ? -1 : 10 + nextNextFrame.getFirstRoll();
         }
         return nextFrame.getFirstRoll() + nextFrame.getSecondRoll();
     }

@@ -1,6 +1,5 @@
 package tr.akd.Bowling.Scores.services;
 
-import org.springframework.stereotype.Component;
 import tr.akd.Bowling.Scores.models.BowlingScore;
 import tr.akd.Bowling.Scores.models.Frame;
 
